@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { add } from "../redux/toDoSlice";
 import TodoList from "./TodoList";
+
 export default function Todo() {
   const [newtodo, setNewtodo] = useState("");
   const dispatch = useDispatch();
@@ -13,6 +14,11 @@ export default function Todo() {
     if (newtodo.trim() !== "") {
       handleAddTodo(newtodo.trim());
       setNewtodo("");
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleAddTodoClick();
     }
   };
   return (
@@ -29,6 +35,7 @@ export default function Todo() {
             id="addTodoInput"
             value={newtodo}
             onChange={(e) => setNewtodo(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Add Todo"
             className=" flex-grow p-2 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500 rounded-xl"
           />
